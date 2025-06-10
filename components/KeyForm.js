@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
+import ChordChart from './ChordChart';
 
 function KeyForm() {
     const [selectedShapeValue, setSelectedShapeValue] = useState(11);
@@ -43,6 +44,8 @@ function KeyForm() {
             <Picker.Item label="G" value={11}/>
             <Picker.Item label="A♭" value={12}/>
         </Picker>
+
+        <ChordChart shapeValue={selectedShapeValue} keyValue={selectedKeyValue}/>
     </View>
     );
 }
