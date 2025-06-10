@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 
 function ChordChart({ shapeValue, keyValue }) {
@@ -42,15 +42,79 @@ function ChordChart({ shapeValue, keyValue }) {
     const capoPosition = getCapo(keyValue, shapeValue);
 
     return (
-        <View style={{ padding: 10 }}>
-            <Text style={{ fontSize: 18, marginBottom: 10 }}>
-                Capo on fret: {capoPosition}
-            </Text>
-            <Table borderStyle={{ borderWidth: 1, borderColor: '#000' }}>
-                <Rows data={chordTableData} />
-            </Table>
+        <View style={styles.container}>
+            <View style={styles.capoContainer}>
+                <Text style={styles.capoLabel}>Capo Position:</Text>
+                <Text style={styles.capoValue}>{capoPosition}</Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={true}>
+                <View style={styles.tableContainer}>
+                    <Table borderStyle={styles.tableBorder}>
+                        <Rows 
+                            data={chordTableData} 
+                            textStyle={styles.tableText}
+                            style={styles.tableRow}
+                            widthArr={[120, 60, 60, 60, 60, 60, 60, 60]}
+                        />
+                    </Table>
+                </View>
+            </ScrollView>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 20,
+    },
+    capoContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 15,
+        backgroundColor: '#e3f2fd',
+        padding: 10,
+        borderRadius: 8,
+    },
+    capoLabel: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#1976d2',
+        marginRight: 8,
+    },
+    capoValue: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#1976d2',
+    },
+    tableContainer: {
+        backgroundColor: '#ffffff',
+        borderRadius: 8,
+        overflow: 'hidden',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 2,
+    },
+    tableBorder: {
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
+    },
+    tableRow: {
+        height: 60,
+        backgroundColor: '#f5f5f5',
+    },
+    tableText: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: '#2c3e50',
+        padding: 8,
+        flexWrap: 'wrap',
+    },
+});
 
 export default ChordChart;
