@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     },
     tableContainer: {
         backgroundColor: '#ffffff',
-        borderRadius: 8,
         overflow: 'hidden',
         shadowColor: '#000',
         shadowOffset: {
